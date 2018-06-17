@@ -115,3 +115,11 @@ function derivePublicFromPrivate (jwKey) {
     ['verify']
   )
 }
+
+exports.encrypt = function (key, bytes, cb) {
+  return cb(new Error('rsa.pubKey.encrypt() not yet implemented in the browser! (PRs welcome: https://github.com/libp2p/js-libp2p-crypto)'))
+}
+
+exports.decrypt = function (key, bytes, cb) {
+  return cb(new Error('rsa.privKey.decrypt() not yet implemented in the browser! (PRs welcome: https://github.com/libp2p/js-libp2p-crypto)'))
+}

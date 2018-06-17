@@ -98,3 +98,27 @@ exports.hashAndVerify = function (key, sig, msg, callback) {
     callback(null, result)
   })
 }
+
+exports.encrypt = function (key, bytes, cb) {
+  let res
+
+  try {
+    res = crypto.publicEncrypt(jwkToPem(key), bytes)
+  } catch (err) {
+    return cb(err)
+  }
+
+  return cb(null, res)
+}
+
+exports.decrypt = function (key, bytes, cb) {
+  let res
+
+  try {
+    res = crypto.privateDecrypt(jwkToPem(key), bytes)
+  } catch (err) {
+    return cb(err)
+  }
+
+  return cb(null, res)
+}

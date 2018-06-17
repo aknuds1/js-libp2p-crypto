@@ -30,8 +30,8 @@ class RsaPublicKey {
     })
   }
 
-  encrypt (bytes) {
-    return this._key.encrypt(bytes, 'RSAES-PKCS1-V1_5')
+  encrypt (bytes, cb) {
+    crypto.encrypt(this._key, bytes, cb)
   }
 
   equals (key) {
@@ -69,8 +69,8 @@ class RsaPrivateKey {
     return new RsaPublicKey(this._publicKey)
   }
 
-  decrypt (msg, callback) {
-    crypto.decrypt(this._key, msg, callback)
+  decrypt (bytes, cb) {
+    crypto.decrypt(this._key, bytes, cb)
   }
 
   marshal () {
