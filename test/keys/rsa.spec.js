@@ -128,6 +128,23 @@ describe('RSA', function () {
     })
   })
 
+  it('encrypt and decrypt', (done) => {
+    const data = Buffer.from('hello world')
+    key.public.encrypt(data, (err, enc) => {
+      if (err) {
+        return done(err)
+      }
+
+      key.decrypt(enc, (err, dec) => {
+        if (err) {
+          return done(err)
+        }
+        expect(dec).to.be.eql(data)
+        done()
+      })
+    })
+  })
+
   it('fails to verify for different data', (done) => {
     const data = Buffer.from('hello world')
     key.sign(data, (err, sig) => {

@@ -116,10 +116,48 @@ function derivePublicFromPrivate (jwKey) {
   )
 }
 
-exports.encrypt = function (key, bytes, cb) {
-  return cb(new Error('rsa.pubKey.encrypt() not yet implemented in the browser! (PRs welcome: https://github.com/libp2p/js-libp2p-crypto)'))
+exports.encrypt = function (key, msg, callback) {
+  key = Object.assign({}, key)
+  key.key_ops = ['encrypt']
+  console.log(key)
+
+  nodeify(webcrypto.subtle.importKey(
+    'jwk',
+    key,
+    {
+      name: 'RSA-OAEP',
+      hash: { name: 'SHA-256' }
+    },
+    false,
+    ['encrypt']
+  ).then((publicKey) => {
+    return webcrypto.subtle.encrypt(
+      { name: 'RSA-OEAP' },
+      publicKey,
+      Uint8Array.from(msg)
+    )
+  }).then((enc) => Buffer.from(enc)), callback)
+}
+ 
+exports.decrypt = function (key, msg, callback) {
+  key = Object.assign({}, key)
+  key.key_ops = ['decrypt']
+
+  nodeify(webcrypto.subtle.importKey(
+    'jwk',
+    key,
+    {
+      name: 'RSA-OAEP',
+      hash: { name: 'SHA-256' }
+    },
+    false,
+    ['decrypt']
+  ).then((privateKey) => {
+    return webcrypto.subtle.decrypt(
+      { name: 'RSA-OAEP' },
+      privateKey,
+      Uint8Array.from(msg)
+    )
+  }).then((dec) => Buffer.from(dec)), callback)
 }
 
-exports.decrypt = function (key, bytes, cb) {
-  return cb(new Error('rsa.privKey.decrypt() not yet implemented in the browser! (PRs welcome: https://github.com/libp2p/js-libp2p-crypto)'))
-}
