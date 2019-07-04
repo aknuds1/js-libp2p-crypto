@@ -1,9 +1,9 @@
 {
-  "name": "libp2p-crypto",
+  "name": "@arve.knudsen/libp2p-crypto",
   "version": "0.16.2",
   "description": "Crypto primitives for libp2p",
   "main": "src/index.js",
-  "leadMaintainer": "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
+  "leadMaintainer": "Arve Knudsen <arve.knudsen@gmail.com>",
   "browser": {
     "./src/hmac/index.js": "./src/hmac/index-browser.js",
     "./src/keys/ecdh.js": "./src/keys/ecdh-browser.js",
@@ -66,12 +66,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/libp2p/js-libp2p-crypto.git"
+    "url": "https://github.com/aknuds1/js-libp2p-crypto.git"
   },
   "bugs": {
-    "url": "https://github.com/libp2p/js-libp2p-crypto/issues"
+    "url": "https://github.com/aknuds1/js-libp2p-crypto/issues"
   },
-  "homepage": "https://github.com/libp2p/js-libp2p-crypto",
+  "homepage": "https://github.com/aknuds1/js-libp2p-crypto",
   "contributors": [
     "Alberto Elias <hi@albertoelias.me>",
     "David Dias <daviddias.p@gmail.com>",
